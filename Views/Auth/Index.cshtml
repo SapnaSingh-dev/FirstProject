@@ -1,0 +1,66 @@
+﻿
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <style>
+
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+<body style="  background: linear-gradient(135deg, #72B6E3, #373737);">
+    <div class="d-flex justify-content-center align-items-center vh-100">
+
+
+        <div class="card" style="width: 23rem;">
+            <div class="card-body">
+                <h2 class="text-center">Login</h2>
+                <form id="form">
+                    <input type="email" id="email" name="name" value="" placeholder="Email" style="border:none; border-bottom:2px solid gray; width: 100%; padding: 5px;" /><br /><br />
+                    <input type="password" id="password" name="name" value="" placeholder="Password" style="border:none; border-bottom:2px solid gray; width: 100%; padding: 5px;" /><br />
+                    <button style="border:none; background-color:white; ">Forget Password?</button><br />
+                    <div class="d-flex justify-content-center mt-3">
+                        <button type="button" id="loginbtn" style="width:3500px;  background: linear-gradient(to right, #72B6E3, #373737); border-radius:5px;">Login</button>
+                    </div>
+                </form><br />
+                <p class="text-center">Don't have an account?<a href="Auth/Signup" style="border:none; background-color:white; ">Register</a></p>
+
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(function(){
+            
+            $("#loginbtn").click(function(){
+            var Loginreq={
+                Email:$("#email").val(),
+                Password: $("#password").val()
+            }
+            $.ajax({
+                url:"/Auth/Login",
+                type:"POST",
+                contentType:"application/json",
+                data:JSON.stringify(Loginreq),
+                success: function(response){
+                    console.log(response)
+                    if(response.statuscode ==1){
+                        alert("login status: " + response.msg);
+                    }else{
+                         alert("login status: " + response.msg);
+                    }
+                    
+                },
+                error: function(xhr, status){
+                     alert("Error: " + xhr.responseText);
+                      console.log(response)
+                }
+            })
+            })
+        })
+    </script>
+</body>
+</html>
